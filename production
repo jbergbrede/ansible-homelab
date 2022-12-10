@@ -1,0 +1,7 @@
+# Prod inventory
+
+[unifi]
+unifi-controller
+
+[unifi:vars]
+ansible_user=root

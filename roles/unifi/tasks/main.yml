@@ -1,0 +1,49 @@
+---
+  - name: Install ca-certificates and apt-transport-https
+    ansible.builtin.apt:
+      pkg:
+      - ca-certificates
+      - apt-transport-https
+      state: latest
+  - name: Add Adoptium source
+    block:
+      - name: Download adoptium gpg
+        ansible.builtin.get_url:
+          url: https://packages.adoptium.net/artifactory/api/gpg/key/public
+          dest: /etc/apt/trusted.gpg.d/adoptium.asc
+      - name: Add adoptium repository into sources list
+        ansible.builtin.apt_repository:
+          repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/adoptium.asc] https://packages.adoptium.net/artifactory/deb focal main"
+          filename: adoptium
+          state: present
+  - name: Install Java 11
+    ansible.builtin.apt:
+      name: temurin-11-jdk
+      state: latest
+  - name: Add Unifi source
+    block:
+      - name: Download unifi gpg
+        ansible.builtin.get_url:
+          url: https://dl.ui.com/unifi/unifi-repo.gpg
+          dest: /etc/apt/trusted.gpg.d/unifi-repo.gpg
+      - name: Add unifi repository into sources list
+        ansible.builtin.apt_repository:
+          repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/unifi-repo.gpg] https://www.ui.com/downloads/unifi/debian stable ubiquiti"
+          filename: mongodb-org-3.4
+          state: present
+  - name: Add MongoDB source
+    block:
+      - name: Download mongo gpg
+        ansible.builtin.get_url:
+          url: https://www.mongodb.org/static/pgp/server-3.4.asc
+          dest: /etc/apt/trusted.gpg.d/mongo-3.4.asc
+      - name: Add mongodb repository into sources list
+        ansible.builtin.apt_repository:
+          repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/mongo-3.4.asc] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse"
+          filename: 100-ubnt-unifi
+          state: present
+  - name: Install Unifi
+    ansible.builtin.apt:
+      name: unifi
+      state: latest
+    

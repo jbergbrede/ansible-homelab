@@ -1,0 +1,7 @@
+# Staging inventory
+
+[unifi]
+ansible-unifi-dev
+
+[unifi:vars]
+ansible_user=root

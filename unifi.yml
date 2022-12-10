@@ -1,0 +1,6 @@
+---
+# file: unifi.yml
+- hosts: unifi
+  roles:
+    - common
+    - unifi

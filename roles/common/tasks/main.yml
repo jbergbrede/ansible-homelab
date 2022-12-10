@@ -1,0 +1,21 @@
+---
+  - name: Update apt packages
+    become: true
+    ansible.builtin.apt:
+      update_cache: yes
+      cache_valid_time: 86400 #One day
+  - name: Add ookla source
+    block:
+      - name: Download ookla gpg
+        ansible.builtin.get_url:
+          url: https://packagecloud.io/ookla/speedtest-cli/gpgkey
+          dest: /etc/apt/trusted.gpg.d/ookla.asc
+      - name: Add ookla repository into sources list
+        ansible.builtin.apt_repository:
+          repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/ookla.asc] https://packagecloud.io/ookla/speedtest-cli/ubuntu/ focal main"
+          filename: ookla_speedtest-cli
+          state: present
+  - name: Install ookla speedtest-cli
+    ansible.builtin.apt:
+      name: speedtest
+      state: latest
