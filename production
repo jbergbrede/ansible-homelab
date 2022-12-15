@@ -5,3 +5,9 @@ unifi-controller
 
 [unifi:vars]
 ansible_user=root
+
+[homebridge]
+homebridge
+
+[homebridge:vars]
+ansible_user=root

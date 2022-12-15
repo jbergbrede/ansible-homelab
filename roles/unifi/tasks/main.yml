@@ -45,5 +45,4 @@
   - name: Install Unifi
     ansible.builtin.apt:
       name: unifi
-      state: latest
-    
+      state: latest    

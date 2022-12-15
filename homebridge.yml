@@ -1,0 +1,6 @@
+---
+# file: homebridge.yml
+- hosts: homebridge
+  roles:
+    - common
+    - homebridge

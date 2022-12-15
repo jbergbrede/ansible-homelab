@@ -1,0 +1,16 @@
+---
+  - name: Add Homebridge source
+    block:
+      - name: Download Homebridge gpg
+        ansible.builtin.get_url:
+          url: https://repo.homebridge.io/KEY.gpg
+          dest: /etc/apt/trusted.gpg.d/homebridge.asc
+      - name: Add unifi repository into sources list
+        ansible.builtin.apt_repository:
+          repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/homebridge.asc] https://repo.homebridge.io stable main"
+          filename: homebridge
+          state: present
+  - name: Install Homebridge
+    ansible.builtin.apt:
+      name: homebridge
+      state: latest

@@ -1,7 +1,13 @@
 # Staging inventory
 
 [unifi]
-ansible-unifi-dev
+unifi-controller-staging
 
 [unifi:vars]
+ansible_user=root
+
+[homebridge]
+homebridge-staging
+
+[homebridge:vars]
 ansible_user=root
