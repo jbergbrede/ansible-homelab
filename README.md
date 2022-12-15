@@ -5,12 +5,12 @@ Ansible playbooks for my homelab
 
 ### Execute command on group of machines:
 
-`ansible <host-group> -i <env> -m <command>`
+`ansible <host-group> -i <inventory> -m <command>`
 
 for example: `ansible unifi -i staging -m ping`
 
 ### Run ansible playbook:
 
-`ansible-playbook -i <env> <playbook>.yml`
+`ansible-playbook -i <inventory> <playbook>.yml`
 
 for example: `ansible-playbook -i production homebridge.yml`
